@@ -20,7 +20,7 @@ choices.forEach((choice) => {
 
 const gameDraw = () => {
   msg.innerText = "Game Draw Play Again";
-  msg.style.backgroundColor="grey";
+  msg.style.backgroundColor="#808080";
 };
 
 const genCompChoice = () => {
