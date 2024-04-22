@@ -1,16 +1,21 @@
+
 const choices = document.querySelectorAll(".choice");
 const msg = document.querySelector("#msg");
 const user = document.querySelector("#user");
+const reset = document.querySelector(".reset");
 
+//Getting name from User
 const userName= prompt("Enter Player's Name");
 user.innerText= userName;
 
+//Initializing scores.
 let userScore = 0;
 let compScore = 0;
 
 const userScorePara = document.querySelector("#user-score");
 const compScorePara = document.querySelector("#comp-score");
 
+//Getting input from user click
 choices.forEach((choice) => {
   choice.addEventListener("click", () => {
     const userChoice = choice.getAttribute("id");
@@ -18,16 +23,19 @@ choices.forEach((choice) => {
   });
 });
 
+//difining game draw situation
 const gameDraw = () => {
   msg.innerText = "Game Draw Play Again";
-  msg.style.backgroundColor="#808080";
+  msg.style.backgroundColor="#808080"
 };
 
+//random computer choice generator
 const genCompChoice = () => {
   const options = ["rock", "paper", "scissor"];
   return options[Math.floor(Math.random() * 3)];
 };
 
+//function for result++ and msg updation
 const showWinner = (userWin,userChoice,compChoice) =>{
 if(userWin){
     userScore++;
@@ -43,11 +51,13 @@ else{
     }
 };
 
+//main function => game logic
 const playGame = (userChoice) => {
   const compChoice = genCompChoice();
 
+  //checking if draw
   if (compChoice == userChoice) {
-    gameDraw();
+    gameDraw(); 
     }
 
     else {
@@ -60,8 +70,22 @@ const playGame = (userChoice) => {
       userWin = userChoice === "rock" ? true : false;
 
     } 
-    console.log(userWin);
 
     showWinner(userWin,userChoice,compChoice);
 };
 }
+
+const resetScore = () => {
+      userScore = 0;
+      compScore = 0;
+
+      msg.style.backgroundColor="#808080";
+      msg.innerText="Play Your Move";
+      userScorePara.innerText=userScore;
+      compScorePara.innerText=compScore;
+
+}
+
+reset.addEventListener("click", () =>{
+  resetScore();
+});
